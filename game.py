@@ -37,10 +37,11 @@ class Game:
         return correct
 
 
+    # Returns the number of questions that have been asked. Does not include the current question
     def numberOfQuestionsAsked(self):
         return self.numRight + self.numWrong + self.numSkipped
     
-
+    # Returns a dictionary with information about the score, etc.
     def score(self):
         return {
             'numRight': self.numRight,
