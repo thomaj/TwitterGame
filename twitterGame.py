@@ -14,6 +14,7 @@ API = twitter.Api(consumer_key=config['consumerKey'],
                     access_token_secret=config['accessTokenSecret'])
 
 
+# Contains logic for interacting with the Twitter api and getting questions
 class TwitterGame(Game):
 
     def __init__(self, name):
@@ -21,6 +22,8 @@ class TwitterGame(Game):
         self.friends = API.GetFriends()
         self.tweets = API.GetHomeTimeline()
 
+    # Gets a tweet from the user's twitter home timeline and provides prossible answers for who tweeted
+    # the tweet.  Only one answer will be correct.
     def getQuestionAndAnswers(self, numAnswers=4):
         tweet = self.getRandomTweet()
 
@@ -46,11 +49,12 @@ class TwitterGame(Game):
         }
 
 
+    # Gets a random tweet from the timeline
     def getRandomTweet(self):
         tweet = self.tweets[random.randint(0, len(self.tweets))]
         return tweet
 
-
+    # Gets random users from the user's friend list
     def getRandomUsers(self, num=4):
         userIndexes = random.sample(xrange(len(self.friends)), num)
         users = [self.friends[i] for i in userIndexes]
