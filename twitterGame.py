@@ -17,7 +17,7 @@ API = twitter.Api(consumer_key=config['consumerKey'],
 # Contains logic for interacting with the Twitter api and getting questions
 class TwitterGame(Game):
 
-    def __init__(self, name):
+    def __init__(self, name='player'):
         Game.__init__(self, name)
         self.friends = API.GetFriends()
         self.tweets = API.GetHomeTimeline()
@@ -38,7 +38,7 @@ class TwitterGame(Game):
             answerIds = [user.id for user in answers]
 
         # Add the correct user to the list at a random location
-        correctIndex = random.randint(0, numAnswers)
+        correctIndex = random.randint(0, numAnswers - 1)
         answersText = [user.name for user in answers]
         answersText.insert(correctIndex, tweet.user.name)
 
